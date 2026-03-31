@@ -11,7 +11,7 @@ const navItems = [
   { name: 'Dashboard', icon: LayoutGrid, path: '/studio' },
   { name: 'Video', icon: Video, path: '/studio/video-scripts' },
   { name: 'Social', icon: Share2, path: '/studio/social-posts' },
-  { name: 'Saved', icon: Bookmark, path: '/studio/prompts' },
+  { name: 'Saved', icon: Bookmark, path: '/studio/saved' },
 ]
 
 export default function BottomNav() {
