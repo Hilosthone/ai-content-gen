@@ -6,7 +6,7 @@ import './globals.css'
 import TopHeader from '@/app/components/navigation/TopHeader'
 import BottomNav from '@/app/components/navigation/BottomNav'
 import { Toaster } from 'sonner'
-import { cn } from '../lib/utils'
+import { cn } from '@/lib/utils'
 
 const inter = Inter({ subsets: ['latin'] })
 

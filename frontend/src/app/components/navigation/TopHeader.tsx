@@ -2,7 +2,7 @@
 
 import { Sparkles, Search, User } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import Link from 'next/link' // Import Link from Next.js
+import Link from 'next/link' 
 
 export default function TopHeader() {
   return (

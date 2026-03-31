@@ -12,7 +12,7 @@ import {
 } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { toast } from 'sonner'
-import { cn } from '../../../lib/utils'
+import { cn } from '@/lib/utils'
 
 export default function SocialPostsPage() {
   const [input, setInput] = useState('')
