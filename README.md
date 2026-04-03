@@ -10,8 +10,8 @@ Generate ready-to-post content for any platform in seconds — just pick your to
 
 | Service | URL |
 |---|---|
-| Backend API | _Coming soon_ |
-| Frontend | _Coming soon_ |
+| Backend API | https://ai-content-gen-b.onrender.com |
+| Frontend | https://ai-content-gen-dqa5.onrender.com |
 
 ---
 
