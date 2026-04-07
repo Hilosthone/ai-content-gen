@@ -1,6 +1,6 @@
 //src/lib/api.ts
 const BACKEND_URL =
-  process.env.NEXT_PUBLIC_API_URL || 'https://ai-content-gen-b.onrender.com'
+  process.env.NEXT_PUBLIC_API_URL || 'http://44.222.98.52:8002'
 
 export interface GenerateRequest {
   topic: string

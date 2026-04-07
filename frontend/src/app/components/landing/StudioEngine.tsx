@@ -46,24 +46,21 @@ export default function GeneratorPreview() {
     setResult(null)
 
     try {
-      const response = await fetch(
-        'https://ai-content-gen-b.onrender.com/generate',
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            topic: topic,
-            platform:
-              API_MAP.platforms[
-                selectedPlatform as keyof typeof API_MAP.platforms
-              ] || 'linkedin',
-            tone:
-              API_MAP.tones[selectedTone as keyof typeof API_MAP.tones] ||
-              'professional',
-            length: 'medium',
-          }),
-        },
-      )
+      const response = await fetch('http://44.222.98.52:8002/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          topic: topic,
+          platform:
+            API_MAP.platforms[
+              selectedPlatform as keyof typeof API_MAP.platforms
+            ] || 'linkedin',
+          tone:
+            API_MAP.tones[selectedTone as keyof typeof API_MAP.tones] ||
+            'professional',
+          length: 'medium',
+        }),
+      })
 
       const data = await response.json()
 
