@@ -1,3 +1,4 @@
+//ai-content-gen/frontend/src/app/studio/video-scripts/page.tsx
 'use client'
 
 import React, { useState, useRef, useEffect } from 'react'

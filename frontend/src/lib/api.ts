@@ -1,4 +1,4 @@
-//src/lib/api.ts
+//ai-content-gen/frontend/src/lib/api.ts
 const BACKEND_URL =
   process.env.NEXT_PUBLIC_API_URL || 'http://44.222.98.52:8002'
 

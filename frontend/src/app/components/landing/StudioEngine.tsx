@@ -8,6 +8,8 @@ import {
   CheckCircle2,
   Zap,
   Layers,
+  Copy, // Added
+  Check, // Added
 } from 'lucide-react'
 
 const API_MAP = {
@@ -35,6 +37,7 @@ export default function GeneratorPreview() {
 
   const [isGenerating, setIsGenerating] = useState(false)
   const [result, setResult] = useState<string | null>(null)
+  const [copied, setCopied] = useState(false) // Added copy state
 
   const platforms = ['Twitter (X)', 'LinkedIn', 'Instagram', 'YouTube']
   const contentTypes = ['Post', 'Thread', 'Script', 'Caption']
@@ -44,6 +47,7 @@ export default function GeneratorPreview() {
 
     setIsGenerating(true)
     setResult(null)
+    setCopied(false) // Reset copy state
 
     try {
       const response = await fetch('http://44.222.98.52:8002/generate', {
@@ -65,8 +69,6 @@ export default function GeneratorPreview() {
       const data = await response.json()
 
       if (response.ok) {
-        // Fix for "Objects are not valid as React child"
-        // Extracts the string if API returns { content: "..." }
         setResult(
           typeof data === 'object'
             ? data.content || data.detail || JSON.stringify(data)
@@ -79,6 +81,18 @@ export default function GeneratorPreview() {
       setResult('Connection error. Please ensure the API server is active.')
     } finally {
       setIsGenerating(false)
+    }
+  }
+
+  // Helper function to handle copying
+  const copyToClipboard = async () => {
+    if (!result) return
+    try {
+      await navigator.clipboard.writeText(result)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch (err) {
+      console.error('Failed to copy: ', err)
     }
   }
 
@@ -191,11 +205,33 @@ export default function GeneratorPreview() {
 
           {/* Result Area */}
           {result && (
-            <div className='p-8 bg-slate-900 rounded-[2rem] text-white animate-in fade-in slide-in-from-bottom-4 shadow-2xl'>
-              <div className='flex items-center gap-2 mb-4 text-indigo-400 font-black text-xs uppercase tracking-[0.2em]'>
-                <CheckCircle2 className='w-4 h-4' /> AI Engine Result
+            <div className='p-8 bg-slate-900 rounded-[2rem] text-white animate-in fade-in slide-in-from-bottom-4 shadow-2xl relative'>
+              <div className='flex items-center justify-between mb-4'>
+                <div className='flex items-center gap-2 text-indigo-400 font-black text-xs uppercase tracking-[0.2em]'>
+                  <CheckCircle2 className='w-4 h-4' /> AI Engine Result
+                </div>
+
+                {/* Copy Button */}
+                <button
+                  onClick={copyToClipboard}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-black uppercase tracking-wider transition-all active:scale-95 ${
+                    copied
+                      ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
+                      : 'bg-white/5 text-slate-400 border border-white/10 hover:bg-white/10 hover:text-white'
+                  }`}
+                >
+                  {copied ? (
+                    <>
+                      <Check className='w-3.5 h-3.5' /> Copied!
+                    </>
+                  ) : (
+                    <>
+                      <Copy className='w-3.5 h-3.5' /> Copy Result
+                    </>
+                  )}
+                </button>
               </div>
-              <p className='whitespace-pre-wrap text-slate-200 leading-relaxed text-lg font-medium'>
+              <p className='whitespace-pre-wrap text-slate-200 leading-relaxed text-lg font-medium text-left'>
                 {result}
               </p>
             </div>
